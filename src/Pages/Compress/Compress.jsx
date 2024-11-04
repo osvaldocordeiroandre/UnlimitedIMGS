@@ -3,34 +3,37 @@ import imageCompression from "browser-image-compression";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
-function MultipleImageCompressor() {
+function MultipleImageCompressor({ load, setLoad }) {
   const [compressedImages, setCompressedImages] = useState([]);
 
   const handleImageUpload = async (event) => {
     const files = Array.from(event.target.files);
     const compressedFiles = [];
 
-    for (const file of files) {
-      const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 800,
-        useWebWorker: true,
-        fileType: "image/webp",
-      };
+    setLoad(true);
 
-      try {
+    try {
+      for (const file of files) {
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 800,
+          useWebWorker: true,
+          fileType: "image/webp",
+        };
+
         const compressedFile = await imageCompression(file, options);
         compressedFiles.push({
           name: file.name.replace(/\.[^/.]+$/, ".webp"),
           file: compressedFile,
           url: URL.createObjectURL(compressedFile),
         });
-      } catch (error) {
-        console.error("Erro ao comprimir a imagem:", error);
       }
+    } catch (error) {
+      console.error("Erro ao comprimir a imagem:", error);
+    } finally {
+      setCompressedImages(compressedFiles);
+      setLoad(false);
     }
-
-    setCompressedImages(compressedFiles);
   };
 
   const handleDownloadZip = async () => {
@@ -51,7 +54,7 @@ function MultipleImageCompressor() {
   return (
     <div className="p-6 mx-auto bg-[#1c1f20] w-full min-h-screen shadow-md text-white flex items-center flex-col">
       <h2 className="text-4xl font-semibold mb-4 text-center">
-        Comrpimir imagens
+        Comprimir imagens
       </h2>
       <input
         type="file"
@@ -60,6 +63,8 @@ function MultipleImageCompressor() {
         onChange={handleImageUpload}
         className="p-2 border border-gray-300 rounded cursor-pointer max-w-[352px] max-h-[48px] w-full h-full"
       />
+
+      {load && <span className="mt-10">Loading...</span>}
 
       {compressedImages.length > 0 && (
         <div className="mt-10">

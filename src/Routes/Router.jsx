@@ -8,13 +8,21 @@ import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 
 export default function Router() {
+  const [load, setLoad] = useState(false);
+
   return (
     <BrowserRouter>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Converter" element={<Converter />} />
-        <Route path="/Compress" element={<Compress />} />
+        <Route
+          path="/Converter"
+          element={<Converter load={load} setLoad={setLoad} />}
+        />
+        <Route
+          path="/Compress"
+          element={<Compress load={load} setLoad={setLoad} />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

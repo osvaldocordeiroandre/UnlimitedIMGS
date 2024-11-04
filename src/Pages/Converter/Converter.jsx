@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import JSZip from "jszip";
 
-function WebPToJPGConverter() {
+function WebPToJPGConverter({ load, setLoad }) {
   const [jpgImages, setJpgImages] = useState([]);
 
   const convertWebPToJPG = (webpFile) => {
@@ -38,26 +38,26 @@ function WebPToJPGConverter() {
   const handleFilesUpload = async (event) => {
     const files = Array.from(event.target.files);
     const convertedImages = [];
+    setLoad(true);
 
-    for (const file of files) {
-      try {
+    try {
+      for (const file of files) {
         const jpgDataUrl = await convertWebPToJPG(file);
-
         const nameWithoutExtension = file.name.replace(/\.webp$/i, "");
-
         convertedImages.push({ name: nameWithoutExtension, url: jpgDataUrl });
-      } catch (error) {
-        console.error(error);
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setJpgImages(convertedImages);
+      setLoad(false); // Termina o loading
     }
-
-    setJpgImages(convertedImages);
   };
 
   const downloadAllAsZip = async () => {
     const zip = new JSZip();
 
-    jpgImages.forEach((image, index) => {
+    jpgImages.forEach((image) => {
       const base64Data = image.url.split(",")[1];
       zip.file(`${image.name}.jpg`, base64Data, { base64: true });
     });
@@ -70,9 +70,8 @@ function WebPToJPGConverter() {
   };
 
   return (
-    <div className="flex flex-col  items-center space-y-6 bg-[#1c1f20] text-white w-full min-h-screen h-full p-6">
+    <div className="flex flex-col items-center space-y-6 bg-[#1c1f20] text-white w-full min-h-screen h-full p-6">
       <h1 className="text-4xl font-bold">WebP para JPG</h1>
-
       <input
         type="file"
         accept="image/webp"
@@ -80,7 +79,8 @@ function WebPToJPGConverter() {
         onChange={handleFilesUpload}
         className="p-2 border border-gray-300 rounded cursor-pointer max-w-[352px] max-h-[48px] w-full h-full"
       />
-
+      {load && <span className="mt-10">Loading...</span>}{" "}
+      {/* Exibe a mensagem de loading */}
       {jpgImages.length > 0 && (
         <button
           onClick={downloadAllAsZip}
@@ -89,7 +89,6 @@ function WebPToJPGConverter() {
           Baixar Todas as Imagens
         </button>
       )}
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 h-[300px] overflow-auto p-10">
         {jpgImages.map((image, index) => (
           <div
