@@ -6,15 +6,15 @@ import { NavLink } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className="bg-[#1c1f20] w-full h-screen text-white flex flex-col">
-      <div className=" flex flex-col flex-wrap items-center mt-10 text-xl mx-auto">
+    <div className="bg-[#1c1f20] w-full min-h-screen h-full text-white flex flex-col">
+      <div className=" flex flex-col flex-wrap items-center mt-10 text-xl mx-auto px-6">
         <h2 className="text-4xl">Ferramentas de imagens necessárias</h2>
         <h3 className="mt-2 text-gray-300">
           Compressor e convertor de imagens ilimitadas grátis!
         </h3>
       </div>
 
-      <div className="mt-10 flex flex-wrap justify-center gap-6">
+      <div className="mt-10 flex flex-wrap justify-center gap-6 px-6">
         <NavLink to={"/Compress"}>
           <div className="bg-[#181a1b] max-w-[320px] max-h-[202px] w-full h-full rounded-md flex flex-col p-6 border border-orange-50 hover:border-orange-300 cursor-pointer">
             <FaCompressArrowsAlt size={30} />
@@ -44,7 +44,7 @@ export default function Home() {
         </NavLink>
       </div>
 
-      <div className="bg-[#181a1b] w-full mt-10 flex flex-col justify-center items-center text-3xl p-10">
+      <div className="bg-[#181a1b] w-full h-auto mt-10 flex flex-col justify-center items-center text-3xl p-10">
         <div>
           <h1>Ferramentas ilimitadas e grátis para todos</h1>
         </div>

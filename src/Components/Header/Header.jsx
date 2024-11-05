@@ -15,8 +15,12 @@ export default function Header() {
       </div>
 
       <ul className="flex  gap-4">
-        <li className="cursor-pointer">COMPRIMIR IMAGEM</li>
-        <li className="cursor-pointer">CONVERTER WEBP TO JPG</li>
+        <NavLink to="/Compress">
+          <li className="cursor-pointer">COMPRIMIR IMAGEM</li>
+        </NavLink>
+        <NavLink to="/Converter">
+          <li className="cursor-pointer">CONVERTER WEBP TO JPG</li>
+        </NavLink>
       </ul>
     </div>
   );
