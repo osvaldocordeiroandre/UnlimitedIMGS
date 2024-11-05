@@ -20,7 +20,7 @@ function WebPToJPGConverter({ load, setLoad }) {
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0);
 
-          const jpgDataUrl = canvas.toDataURL("image/jpeg", 0.92);
+          const jpgDataUrl = canvas.toDataURL("image/png", 0.92);
           resolve(jpgDataUrl);
         };
 
@@ -59,7 +59,7 @@ function WebPToJPGConverter({ load, setLoad }) {
 
     jpgImages.forEach((image) => {
       const base64Data = image.url.split(",")[1];
-      zip.file(`${image.name}.jpg`, base64Data, { base64: true });
+      zip.file(`${image.name}.png`, base64Data, { base64: true });
     });
 
     const zipBlob = await zip.generateAsync({ type: "blob" });
@@ -71,7 +71,7 @@ function WebPToJPGConverter({ load, setLoad }) {
 
   return (
     <div className="flex flex-col items-center space-y-6 bg-[#1c1f20] text-white w-full min-h-screen h-full p-6">
-      <h1 className="text-4xl font-bold">WebP para JPG</h1>
+      <h1 className="text-4xl font-bold">WebP para PNG</h1>
       <input
         type="file"
         accept="image/webp"
@@ -93,7 +93,7 @@ function WebPToJPGConverter({ load, setLoad }) {
                 alt={`Imagem JPG ${index + 1}`}
                 className="max-w-full h-auto rounded-lg shadow-lg"
               />
-              <a href={image.url} download={`${image.name}.jpg`}>
+              <a href={image.url} download={`${image.name}.png`}>
                 <button className="px-4 py-2 w-full bg-blue-500 text-white rounded hover:bg-blue-600 line-clamp-1 min-w-[200px] h-[38px]">
                   Baixar {image.name}
                 </button>

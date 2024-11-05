@@ -14,7 +14,7 @@ export default function Home() {
         </h3>
       </div>
 
-      <div className="mt-10 flex flex-wrap justify-center gap-6 px-6">
+      <div className="mt-10 grid grid-cols-2 max-w-[700px] w-full mx-auto justify-center gap-6 px-6 cd:flex cd:flex-wrap">
         <NavLink to={"/Compress"}>
           <div className="bg-[#181a1b] max-w-[320px] max-h-[202px] w-full h-full rounded-md flex flex-col p-6 border border-orange-50 hover:border-orange-300 cursor-pointer">
             <FaCompressArrowsAlt size={30} />
@@ -36,7 +36,35 @@ export default function Home() {
               <span className="text-2xl line-clamp-1">WEBP para JPG</span>
               <div className="mt-2">
                 <span className="text-gray-300">
-                  Comprima imagens para economizar espaço e manter qualidade!
+                  Converta sua imagem rápido e fácil e sem limites!
+                </span>
+              </div>
+            </div>
+          </div>
+        </NavLink>
+
+        <NavLink to="/WebpToPng">
+          <div className="bg-[#181a1b] max-w-[320px] max-h-[202px] w-full h-full rounded-md flex flex-col p-6 border border-orange-50 hover:border-orange-300 cursor-pointer">
+            <FaFileImage size={30} />
+            <div className="mt-4">
+              <span className="text-2xl line-clamp-1">WEBP para PNG</span>
+              <div className="mt-2">
+                <span className="text-gray-300">
+                  Converta sua imagem rápido e fácil e sem limites!
+                </span>
+              </div>
+            </div>
+          </div>
+        </NavLink>
+
+        <NavLink to="/JpgToPng">
+          <div className="bg-[#181a1b] max-w-[320px] max-h-[202px] w-full h-full rounded-md flex flex-col p-6 border border-orange-50 hover:border-orange-300 cursor-pointer">
+            <FaFileImage size={30} />
+            <div className="mt-4">
+              <span className="text-2xl line-clamp-1">JPG para PNG</span>
+              <div className="mt-2">
+                <span className="text-gray-300">
+                  Converta sua imagem rápido e fácil e sem limites!
                 </span>
               </div>
             </div>

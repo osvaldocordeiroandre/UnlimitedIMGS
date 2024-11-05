@@ -4,10 +4,10 @@ import JSZip from "jszip";
 function WebPToJPGConverter({ load, setLoad }) {
   const [jpgImages, setJpgImages] = useState([]);
 
-  const convertWebPToJPG = (webpFile) => {
+  const convertWebPToJPG = (jpgFile) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.readAsDataURL(webpFile);
+      reader.readAsDataURL(jpgFile);
 
       reader.onload = (event) => {
         const img = new Image();
@@ -20,7 +20,7 @@ function WebPToJPGConverter({ load, setLoad }) {
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0);
 
-          const jpgDataUrl = canvas.toDataURL("image/jpeg", 0.92);
+          const jpgDataUrl = canvas.toDataURL("image/jpg", 0.92);
           resolve(jpgDataUrl);
         };
 
@@ -43,7 +43,7 @@ function WebPToJPGConverter({ load, setLoad }) {
     try {
       for (const file of files) {
         const jpgDataUrl = await convertWebPToJPG(file);
-        const nameWithoutExtension = file.name.replace(/\.webp$/i, "");
+        const nameWithoutExtension = file.name.replace(/\.jpg$/i, "");
         convertedImages.push({ name: nameWithoutExtension, url: jpgDataUrl });
       }
     } catch (error) {
@@ -59,7 +59,7 @@ function WebPToJPGConverter({ load, setLoad }) {
 
     jpgImages.forEach((image) => {
       const base64Data = image.url.split(",")[1];
-      zip.file(`${image.name}.jpg`, base64Data, { base64: true });
+      zip.file(`${image.name}.png`, base64Data, { base64: true });
     });
 
     const zipBlob = await zip.generateAsync({ type: "blob" });
@@ -71,10 +71,10 @@ function WebPToJPGConverter({ load, setLoad }) {
 
   return (
     <div className="flex flex-col items-center space-y-6 bg-[#1c1f20] text-white w-full min-h-screen h-full p-6">
-      <h1 className="text-4xl font-bold">WebP para JPG</h1>
+      <h1 className="text-4xl font-bold">JPG para PNG</h1>
       <input
         type="file"
-        accept="image/webp"
+        accept="image/jpeg"
         multiple
         onChange={handleFilesUpload}
         className="p-2 border border-gray-300 rounded cursor-pointer max-w-[352px] max-h-[48px] w-full h-full"
@@ -86,15 +86,15 @@ function WebPToJPGConverter({ load, setLoad }) {
           {jpgImages.map((image, index) => (
             <div
               key={index}
-              className="flex flex-col items-center space-y-2 max-w-[200px] max-h-[395px]"
+              className="flex flex-col items-center space-y-2 max-w-[200px] max-h-[395px] w-full"
             >
               <img
                 src={image.url}
                 alt={`Imagem JPG ${index + 1}`}
-                className="max-w-full h-auto rounded-lg shadow-lg"
+                className="max-w-[300px] max-h-[300px] w-full h-full rounded-lg shadow-lg"
               />
-              <a href={image.url} download={`${image.name}.jpg`}>
-                <button className="px-4 py-2 w-full bg-blue-500 text-white rounded hover:bg-blue-600 line-clamp-1 min-w-[200px] h-[38px]">
+              <a href={image.url} download={`${image.name}.png`}>
+                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 line-clamp-1 max-w-[200px] h-[38px] w-full">
                   Baixar {image.name}
                 </button>
               </a>
