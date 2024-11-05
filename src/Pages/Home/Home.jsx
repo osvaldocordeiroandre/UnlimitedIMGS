@@ -70,6 +70,20 @@ export default function Home() {
             </div>
           </div>
         </NavLink>
+
+        <NavLink to="/MelhorQualidade">
+          <div className="bg-[#181a1b] max-w-[320px] max-h-[202px] w-full h-full rounded-md flex flex-col p-6 border border-orange-50 hover:border-orange-300 cursor-pointer">
+            <FaFileImage size={30} />
+            <div className="mt-4">
+              <span className="text-2xl line-clamp-1">Melhorar Qualidade</span>
+              <div className="mt-2">
+                <span className="text-gray-300">
+                  Melhora a qualidade de suas imgens sem limite aqui!
+                </span>
+              </div>
+            </div>
+          </div>
+        </NavLink>
       </div>
 
       <div className="bg-[#181a1b] w-full h-auto mt-10 flex flex-col justify-center items-center text-3xl p-10">

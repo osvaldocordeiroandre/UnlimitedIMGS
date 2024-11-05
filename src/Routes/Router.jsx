@@ -8,6 +8,7 @@ import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import WebpToPng from "../Pages/WebpToPng/WebpToPng";
 import JpgToPng from "../Pages/JpgToPng/JpgToPng";
+import BestQuality from "../Pages/BestQuality/BestQuality";
 
 export default function Router() {
   const [load, setLoad] = useState(false);
@@ -33,6 +34,7 @@ export default function Router() {
           path="/JpgToPng"
           element={<JpgToPng load={load} setLoad={setLoad} />}
         />
+        <Route path="/MelhorQualidade" element={<BestQuality load={load} setLoad={setLoad} />} />
       </Routes>
       <Footer />
     </BrowserRouter>
