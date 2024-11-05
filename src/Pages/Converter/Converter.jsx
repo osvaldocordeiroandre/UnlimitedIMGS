@@ -79,34 +79,36 @@ function WebPToJPGConverter({ load, setLoad }) {
         onChange={handleFilesUpload}
         className="p-2 border border-gray-300 rounded cursor-pointer max-w-[352px] max-h-[48px] w-full h-full"
       />
-      {load && <span className="mt-10">Loading...</span>}{" "}
-      {/* Exibe a mensagem de loading */}
-      {jpgImages.length > 0 && (
-        <button
-          onClick={downloadAllAsZip}
-          className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-400"
-        >
-          Baixar Todas as Imagens
-        </button>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 h-[300px] overflow-auto p-10">
-        {jpgImages.map((image, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center space-y-2 max-w-[200px] max-h-[395px]"
+      {load && <span className="mt-10">Loading...</span>}
+
+      <div className="max-[734px w-full]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 h-[300px] overflow-auto p-10">
+          {jpgImages.map((image, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center space-y-2 max-w-[200px] max-h-[395px]"
+            >
+              <img
+                src={image.url}
+                alt={`Imagem JPG ${index + 1}`}
+                className="max-w-full h-auto rounded-lg shadow-lg"
+              />
+              <a href={image.url} download={`${image.name}.jpg`}>
+                <button className="px-4 py-2 w-full bg-blue-500 text-white rounded hover:bg-blue-600 line-clamp-1 min-w-[200px] h-[38px]">
+                  Baixar {image.name}
+                </button>
+              </a>
+            </div>
+          ))}
+        </div>
+        {jpgImages.length > 0 && (
+          <button
+            onClick={downloadAllAsZip}
+            className="px-4 py-2 w-full mt-10 bg-orange-500 text-white rounded hover:bg-orange-400"
           >
-            <img
-              src={image.url}
-              alt={`Imagem JPG ${index + 1}`}
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-            <a href={image.url} download={`${image.name}.jpg`}>
-              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 line-clamp-1 min-w-[200px] h-[38px]">
-                Baixar {image.name}
-              </button>
-            </a>
-          </div>
-        ))}
+            Baixar Todas as Imagens
+          </button>
+        )}
       </div>
     </div>
   );

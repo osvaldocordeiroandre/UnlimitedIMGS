@@ -69,7 +69,7 @@ function MultipleImageCompressor({ load, setLoad }) {
       {compressedImages.length > 0 && (
         <div className="mt-10">
           <h3 className="text-lg font-medium mb-8">Imagens Comprimidas:</h3>
-          <div className="flex flex-wrap gap-4 w-[600px] h-[300px] overflow-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 h-[300px] overflow-auto p-10">
             {compressedImages.map((image, index) => (
               <img
                 key={index}
@@ -81,7 +81,7 @@ function MultipleImageCompressor({ load, setLoad }) {
           </div>
           <button
             onClick={handleDownloadZip}
-            className="mt-4 px-4 py-2 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 focus:outline-none"
+            className="mt-4 px-4 py-2 w-full bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 focus:outline-none"
           >
             Baixar
           </button>
